@@ -85,13 +85,15 @@ def openModFolder():
             modfolder = os.path.join(fname, item)
             if os.path.isfile(f'{fname}/{item}/mod.info'):
                 with open(f'{fname}/{item}/mod.info') as modinfo:
+                    namelist = ['{name','{Name']
                     for line in modinfo:
-                        if '{name' in line:
-                            print (line)
-                            for key,itema in replaceSymbol.items():
-                                line = line.replace(key,itema)
-                                modfolder = modfolder.replace('\\','/')
-                            modlist[f'{item}'] = line + '-' + item
+                        for checkname in namelist:
+                            if checkname in line:
+                                print (line)
+                                for key,itema in replaceSymbol.items():
+                                    line = line.replace(key,itema)
+                                    modfolder = modfolder.replace('\\','/')
+                                modlist[f'{item}'] = line + '-' + item
     # print (modlist)
     w.populateModList()
     # w.populateList()
@@ -205,7 +207,7 @@ class MyApp(QMainWindow):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setText("How to use the program")
-        msg.setInformativeText("To use this programm you need to have at least one mod activated in game first! This programm will not work if there are no mods activated! First locate your mod folder. It should be in Steam\steamapps\workshop\content\400750. Then select your options file, it should be in Documents\my games\gates of hell\profiles\XXXX or \AppData\Local\digitalmindsoft\gates of hell\profiles\\. Their locations will be saved next time you load the programm and you won't have to do it again. Left window has all workshop mods that were found in your mod folder. Right window show all mods that are activated and in what order they are in. You can double click mods to activate\deactivate them or use corresponding button. Drag mods in the right window to set the mod order you need. You can save and delete mod order presets to easily switch between them. After you make your changes make sure to save them to take effect. If you have any more questions then ask on mod page or in discord. If you encounter strange behaviour, restart the programm.\n\nMod made by MrCookie")
+        msg.setInformativeText("To use this programm you need to have at least one mod activated in game first! This programm will not work if there are no mods activated! First locate your mod folder. It should be in Steam\steamapps\workshop\content\400750. Then select your options file, it should be in Documents\my games\gates of hell\profiles\XXXX or \AppData\Local\digitalmindsoft\gates of hell\profiles\\. Their locations will be saved next time you load the programm and you won't have to do it again. Left window has all workshop mods that were found in your mod folder. Right window show all mods that are activated and in what order they are in. You can double click mods to activate\deactivate them or use corresponding button. Drag mods in the right window to set the mod order you need. You can save and delete mod order presets to easily switch between them. After you make your changes make sure to save them to take effect. If you have any more questions then ask on mod page or in discord. If you encounter strange behaviour, restart the programm.Do not use while the game is launched.\n\nMod made by MrCookie")
         msg.setWindowTitle("Read me")
         msg.exec()
     
