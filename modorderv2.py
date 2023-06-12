@@ -207,7 +207,7 @@ class MyApp(QMainWindow):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setText("How to use the program")
-        msg.setInformativeText("To use this programm you need to have at least one mod activated in game first! This programm will not work if there are no mods activated! You can't choose option file until you chose your mod folder!\nFirst locate your mod folder. It should be in Steam\steamapps\workshop\content\\'400750'.AFTER this select your options file, it should be in Documents\my games\gates of hell\profiles\XXXX or \AppData\Local\digitalmindsoft\gates of hell\profiles\\.\nTheir locations will be saved next time you load the programm and you won't have to do it again. Left window has all workshop mods that were found in your mod folder. Right window show all mods that are activated and in what order they are in. You can double click mods to activate\deactivate them or use corresponding button. Drag mods in the right window to set the mod order you need.\nYou can save and delete mod order presets to easily switch between them. After you make your changes make sure to save them to take effect.\nIf you have any more questions then ask on mod page or in official GoH discord. If you encounter strange behaviour, restart the programm.This program will not work if the game is launched.Do not activate it in game.\n\nMod made by MrCookie")
+        msg.setInformativeText("To use this programm you need to have at least one mod activated in game first! This programm will not work if there are no mods activated! You can't choose option file until you chose your mod folder!\nFirst locate your workshop mod folder. It should be  Steam\steamapps\workshop\content\\'400750'.AFTER this select your options file, it should be in Documents\my games\gates of hell\profiles\XXXX or \AppData\Local\digitalmindsoft\gates of hell\profiles\\.\nTheir locations will be saved next time you load the programm and you won't have to do it again. Left window has all workshop mods that were found in your mod folder. Right window show all mods that are activated and in what order they are in. You can double click mods to activate\deactivate them or use corresponding button. Drag mods in the right window to set the mod order you need.\n If you don't see the mod names on the right make sure you have selected mod folder and then select your option file again.You can save and delete mod order presets to easily switch between them. After you make your changes make sure to save them to take effect.\nIf you have any more questions then ask on mod page or in official GoH discord. If you encounter strange behaviour, restart the programm.This program will not work if the game is launched.Do not activate it in game.\n\nMod made by MrCookie")
         msg.setWindowTitle("Read me")
         msg.exec()
     
@@ -331,8 +331,8 @@ class MyApp(QMainWindow):
         self.ui.savePresetButton.clicked.connect(lambda:self.savePreset())
         self.ui.deletePresetButton.clicked.connect(lambda:self.deletePreset())
         self.ui.helpButton.clicked.connect(lambda:self.helpButton())
-        self.ui.chooseOptionFileButton.setEnabled(False)
-        self.ui.listWidget_2.setDragDropMode(QAbstractItemView.InternalMove)
+
+#        self.ui.listWidget_2.setDragDropMode(QAbstractItemView.InternalMove)
         self.ui.presetsComboBox.textActivated.connect(lambda:self.changeActivatedModList())  
         
         # self.ui.listWidget.addItem('x')
@@ -422,7 +422,7 @@ class MyApp(QMainWindow):
         print(quantity)
         # self.ui.listWidget.update()
         print('x')
-        self.ui.chooseOptionFileButton.setEnabled(True)
+ #       self.ui.chooseOptionFileButton.setEnabled(True)
     
         
      
