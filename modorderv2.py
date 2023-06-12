@@ -17,7 +17,7 @@ def openOptionFile():
     modsFound = False
     if os.path.isfile('optionsfile.json'):
         jsonFile = 'optionsfile.json'
-        with open (jsonFile, 'r') as f:
+        with open (jsonFile, 'r', encoding="utf-8") as f:
             
             data = json.load(f)
             print(data)
@@ -35,7 +35,7 @@ def openOptionFile():
     
     print (fileToCheck)
     if fileToCheck != '':
-        with open('optionsfile.json','w')as file:
+        with open('optionsfile.json','w', encoding="utf-8")as file:
             json.dump(fileToCheck,file)
     
     if modsFound == False:
@@ -64,7 +64,7 @@ def openModFolder():
     # else:
     if os.path.isfile('modsfile.json'):
         jsonFileMod = 'modsfile.json'
-        with open (jsonFileMod, 'r') as fmod:
+        with open (jsonFileMod, 'r', encoding="utf-8") as fmod:
             
             datamod = json.load(fmod)
             print(datamod)
@@ -74,7 +74,7 @@ def openModFolder():
     directoryToCheck = fname
     # print (directoryToCheck)
     if directoryToCheck != '':
-        with open('modsfile.json','w')as file:
+        with open('modsfile.json','w', encoding="utf-8")as file:
             json.dump(directoryToCheck,file)
     
     directory_list = list()
@@ -118,7 +118,7 @@ class MyApp(QMainWindow):
     def initiatesModStuff(self):                
         if os.path.isfile('modsfile.json'):
             jsonFileMod = 'modsfile.json'
-            with open (jsonFileMod, 'r') as f:
+            with open (jsonFileMod, 'r', encoding="utf-8") as f:
                 data = json.load(f)
                 directory_list = list()
                 modlistinitial = {}
@@ -149,7 +149,7 @@ class MyApp(QMainWindow):
         if os.path.isfile('optionsfile.json'):
             jsonFile = 'optionsfile.json'
             modsFound = False
-            with open (jsonFile, 'r') as filejson:
+            with open (jsonFile, 'r', encoding="utf-8") as filejson:
                 data = json.load(filejson)
                 activatedModList = []
             
@@ -207,7 +207,7 @@ class MyApp(QMainWindow):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setText("How to use the program")
-        msg.setInformativeText("To use this programm you need to have at least one mod activated in game first! This programm will not work if there are no mods activated! First locate your mod folder. It should be in Steam\steamapps\workshop\content\400750. Then select your options file, it should be in Documents\my games\gates of hell\profiles\XXXX or \AppData\Local\digitalmindsoft\gates of hell\profiles\\. Their locations will be saved next time you load the programm and you won't have to do it again. Left window has all workshop mods that were found in your mod folder. Right window show all mods that are activated and in what order they are in. You can double click mods to activate\deactivate them or use corresponding button. Drag mods in the right window to set the mod order you need. You can save and delete mod order presets to easily switch between them. After you make your changes make sure to save them to take effect. If you have any more questions then ask on mod page or in discord. If you encounter strange behaviour, restart the programm.Do not use while the game is launched.\n\nMod made by MrCookie")
+        msg.setInformativeText("To use this programm you need to have at least one mod activated in game first! This programm will not work if there are no mods activated! You can't choose option file until you chose your mod folder!\nFirst locate your mod folder. It should be in Steam\steamapps\workshop\content\\'400750'.AFTER this select your options file, it should be in Documents\my games\gates of hell\profiles\XXXX or \AppData\Local\digitalmindsoft\gates of hell\profiles\\.\nTheir locations will be saved next time you load the programm and you won't have to do it again. Left window has all workshop mods that were found in your mod folder. Right window show all mods that are activated and in what order they are in. You can double click mods to activate\deactivate them or use corresponding button. Drag mods in the right window to set the mod order you need.\nYou can save and delete mod order presets to easily switch between them. After you make your changes make sure to save them to take effect.\nIf you have any more questions then ask on mod page or in official GoH discord. If you encounter strange behaviour, restart the programm.This program will not work if the game is launched.Do not activate it in game.\n\nMod made by MrCookie")
         msg.setWindowTitle("Read me")
         msg.exec()
     
@@ -218,7 +218,7 @@ class MyApp(QMainWindow):
         oldPresets = json.load(open(presetJson))
         if type(oldPresets) is dict:
             oldPresets = [oldPresets]
-        with open(presetJson,'w')as file:
+        with open(presetJson,'w', encoding="utf-8")as file:
             
             
             # print(jsondata)
@@ -244,7 +244,7 @@ class MyApp(QMainWindow):
         oldPresets = json.load(open(presetJson))
         if type(oldPresets) is dict:
             oldPresets = [oldPresets]
-        with open(presetJson,'w')as file:
+        with open(presetJson,'w', encoding="utf-8")as file:
             # print(oldPresets)
             for presetList in oldPresets:
                 for presetMods,presetValues in presetList.items():
@@ -268,12 +268,12 @@ class MyApp(QMainWindow):
     def createPresetFile(self):
         if not os.path.isfile('presetfile.json'):
             empty = {'no preset':'x'}
-            with open('presetfile.json','w')as file:
+            with open('presetfile.json','w', encoding="utf-8")as file:
                 json.dump(empty,file)
         else:
             if os.path.getsize('presetfile.json') == 0:
                 dummyfile = {'no preset':'x'}
-                with open('presetfile.json','w')as file:
+                with open('presetfile.json','w', encoding="utf-8")as file:
                     json.dump(dummyfile,file)
     
     def comboBoxOptions(self):
@@ -365,9 +365,9 @@ class MyApp(QMainWindow):
                 newlines = newlines + '\t'+'\t'+'"mod_'+re.sub('.*-','',i) + ':0"'+'\n'
                 
             
-            with open (jsonFile, 'r') as f:
+            with open (jsonFile, 'r', encoding="utf-8") as f:
                 data = json.load(f)
-                with open (data,'r+') as newfile:
+                with open (data,'r+', encoding="utf-8") as newfile:
                     newfile2 = newfile.read()
                     
                     newfile3 = re.sub('(?<=\t{mods\n)[^`]*(?=\t})','',newfile2)
