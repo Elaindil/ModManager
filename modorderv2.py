@@ -17,7 +17,7 @@ def openOptionFile():
     modsFound = False
     if os.path.isfile('optionsfile.json'):
         jsonFile = 'optionsfile.json'
-        with open (jsonFile, 'r', encoding="utf-8") as f:
+        with open (jsonFile, 'r', errors='ignore') as f:
             
             data = json.load(f)
             print(data)
@@ -35,7 +35,7 @@ def openOptionFile():
     
     print (fileToCheck)
     if fileToCheck != '':
-        with open('optionsfile.json','w', encoding="utf-8")as file:
+        with open('optionsfile.json','w', errors='ignore')as file:
             json.dump(fileToCheck,file)
     
     if modsFound == False:
@@ -64,7 +64,7 @@ def openModFolder():
     # else:
     if os.path.isfile('modsfile.json'):
         jsonFileMod = 'modsfile.json'
-        with open (jsonFileMod, 'r', encoding="utf-8") as fmod:
+        with open (jsonFileMod, 'r', errors='ignore') as fmod:
             
             datamod = json.load(fmod)
             print(datamod)
@@ -74,7 +74,7 @@ def openModFolder():
     directoryToCheck = fname
     # print (directoryToCheck)
     if directoryToCheck != '':
-        with open('modsfile.json','w', encoding="utf-8")as file:
+        with open('modsfile.json','w', errors='ignore')as file:
             json.dump(directoryToCheck,file)
     
     directory_list = list()
@@ -84,7 +84,7 @@ def openModFolder():
         if os.path.isdir(os.path.join(fname, item)):
             modfolder = os.path.join(fname, item)
             if os.path.isfile(f'{fname}/{item}/mod.info'):
-                with open(f'{fname}/{item}/mod.info') as modinfo:
+                with open(f'{fname}/{item}/mod.info',errors='ignore') as modinfo:
                     namelist = ['{name','{Name']
                     for line in modinfo:
                         for checkname in namelist:
@@ -118,7 +118,7 @@ class MyApp(QMainWindow):
     def initiatesModStuff(self):                
         if os.path.isfile('modsfile.json'):
             jsonFileMod = 'modsfile.json'
-            with open (jsonFileMod, 'r', encoding="utf-8") as f:
+            with open (jsonFileMod, 'r', errors='ignore') as f:
                 data = json.load(f)
                 directory_list = list()
                 modlistinitial = {}
@@ -126,7 +126,7 @@ class MyApp(QMainWindow):
                     if os.path.isdir(os.path.join(data, item)):
                         modfolder = os.path.join(data, item)
                         if os.path.isfile(f'{data}/{item}/mod.info'):
-                            with open(f'{data}/{item}/mod.info') as modinfo:
+                            with open(f'{data}/{item}/mod.info',errors='ignore') as modinfo:
                                 for line in modinfo:
                                     if '{name' in line:
                                         # print (line)
@@ -149,11 +149,11 @@ class MyApp(QMainWindow):
         if os.path.isfile('optionsfile.json'):
             jsonFile = 'optionsfile.json'
             modsFound = False
-            with open (jsonFile, 'r', encoding="utf-8") as filejson:
+            with open (jsonFile, 'r', errors='ignore') as filejson:
                 data = json.load(filejson)
                 activatedModList = []
             
-                with open (data,'r') as f:
+                with open (data,'r',errors='ignore') as f:
                     for line in f:
                         if 'mod_' in line:
                             print(line)
@@ -218,7 +218,7 @@ class MyApp(QMainWindow):
         oldPresets = json.load(open(presetJson))
         if type(oldPresets) is dict:
             oldPresets = [oldPresets]
-        with open(presetJson,'w', encoding="utf-8")as file:
+        with open(presetJson,'w', errors='ignore')as file:
             
             
             # print(jsondata)
@@ -244,7 +244,7 @@ class MyApp(QMainWindow):
         oldPresets = json.load(open(presetJson))
         if type(oldPresets) is dict:
             oldPresets = [oldPresets]
-        with open(presetJson,'w', encoding="utf-8")as file:
+        with open(presetJson,'w', errors='ignore')as file:
             # print(oldPresets)
             for presetList in oldPresets:
                 for presetMods,presetValues in presetList.items():
@@ -268,12 +268,12 @@ class MyApp(QMainWindow):
     def createPresetFile(self):
         if not os.path.isfile('presetfile.json'):
             empty = {'no preset':'x'}
-            with open('presetfile.json','w', encoding="utf-8")as file:
+            with open('presetfile.json','w', errors='ignore')as file:
                 json.dump(empty,file)
         else:
             if os.path.getsize('presetfile.json') == 0:
                 dummyfile = {'no preset':'x'}
-                with open('presetfile.json','w', encoding="utf-8")as file:
+                with open('presetfile.json','w', errors='ignore')as file:
                     json.dump(dummyfile,file)
     
     def comboBoxOptions(self):
@@ -365,9 +365,9 @@ class MyApp(QMainWindow):
                 newlines = newlines + '\t'+'\t'+'"mod_'+re.sub('.*-','',i) + ':0"'+'\n'
                 
             
-            with open (jsonFile, 'r', encoding="utf-8") as f:
+            with open (jsonFile, 'r', errors='ignore') as f:
                 data = json.load(f)
-                with open (data,'r+', encoding="utf-8") as newfile:
+                with open (data,'r+', errors='ignore') as newfile:
                     newfile2 = newfile.read()
                     
                     newfile3 = re.sub('(?<=\t{mods\n)[^`]*(?=\t})','',newfile2)
