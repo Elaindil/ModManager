@@ -332,7 +332,7 @@ class MyApp(QMainWindow):
         self.ui.deletePresetButton.clicked.connect(lambda:self.deletePreset())
         self.ui.helpButton.clicked.connect(lambda:self.helpButton())
 
-#        self.ui.listWidget_2.setDragDropMode(QAbstractItemView.InternalMove)
+        self.ui.listWidget_2.setDragDropMode(QAbstractItemView.InternalMove)
         self.ui.presetsComboBox.textActivated.connect(lambda:self.changeActivatedModList())  
         
         # self.ui.listWidget.addItem('x')
